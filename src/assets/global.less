@@ -17,3 +17,12 @@ html {
   color: @primary-color;
   transition: all 0.5s ease-in-out;
 }
+
+.navlink {
+  font-weight: bold;
+  color: @primary-color;
+
+  &.router-link-exact-active {
+    color: @primary-color--active;
+  }
+}
