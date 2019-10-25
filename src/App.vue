@@ -28,43 +28,52 @@
 }
 </style>
 <script>
-import { defaultTheme } from './styles';
-import global from './assets/global.less';
+import axios from 'axios';
 
 export default {
   data: function(){
     return {
-      theme: defaultTheme,
     };
   },
   methods: {
-    switchTheme(value) {
-      console.warn('switching app theme..: ', value);
+
+    switchTheme() {
       const pickedColor = document.querySelector('#colorPicker');
-      this.theme = Object.assign({}, defaultTheme, { backgroundColor: pickedColor.value })
       this.postThemeConfig(pickedColor.value)
     },
     postThemeConfig(primaryColor) {
-      fetch('http://127.0.0.1:3002/customtheme', {
-        body: JSON.stringify({ primaryColor }), // must match 'Content-Type' header
+      const url = 'http://127.0.0.1:3002/customtheme?primaryColor=' +
+        primaryColor.slice(1);
+      axios.get(url, {
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         // credentials: 'same-origin', // include, same-origin, *omit
         headers: {
           // 'user-agent': 'Mozilla/4.0 MDN Example',
-          'content-type': 'application/json'
+          'content-type': 'text/*'
         },
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
       })
-      .then(response => response.json())
+      .then(response => {
+        // console.log('got updated theme g CSS: ', response.data);
+        if (response.status === 200) {
+          this.updateHeadStyle(response.data);
+        }
+      })
     },
-    // should insert new global.css to 
+    // should insert new global.css to Head end.
+    updateHeadStyle(newTheme) {
+      var head = document.querySelector('head');
+      var newStyle = document.createElement('style');
+      newStyle.setAttribute('type', 'text/css');
+      newStyle.innerText = newTheme;
+      head.appendChild(newStyle);
+    }
   },
   computed() {
   },
   render() {
-    console.warn(global);
+    // console.warn(global);
     return (
-      <div id="app" style={this.theme}>
+      <div id="app" class="app">
         <div id="nav">
           <router-link to="/">Home</router-link> |
           <router-link to="/about">About</router-link>
