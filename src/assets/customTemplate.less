@@ -1,5 +1,5 @@
-@primary: $primary!important;
-@primary-color: $primary-color!important;
+@primary: $primary;
+@primary-color: $primary-color;
 @primary-color--active: #595;
 
 body,
@@ -11,12 +11,18 @@ html {
   color: @primary-color;
 }
 
-.app {
+#app {
   background-color: @primary;
   color: @primary-color;
+}
+
+.about,
+.app {
   transition: all 0.5s ease-in-out;
 }
 
+#app a,
+#nav a,
 .navlink {
   font-weight: bold;
   color: @primary-color;

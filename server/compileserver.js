@@ -58,8 +58,8 @@ function hexToRgb(hex) {
 function changeGlobalStyleFile(primary) {
   var originalStyle = fs.readFileSync('./src/assets/customTemplate.less');
   // if primaryColor belong to dark, then apply light text color. vice versa..
-  var fontColor = hexToRgb(primary).r + hexToRgb(primary).g + hexToRgb(primary).b < 100 ?
-    '#efe' : '#333';
+  var fontColor = hexToRgb(primary).r + hexToRgb(primary).g + hexToRgb(primary).b < 250 ?
+    '#ddd' : '#333';
   
   var newStyle = originalStyle.toString()
     .replace('$primary;', `${primary};`)

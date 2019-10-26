@@ -2,6 +2,7 @@
 <style lang="less">
 @import url('./assets/global.less');
 
+// stylesheet would be overwrite by custom global styles in <Head>
 #app {
   height: 100%;
   width: 100%;
@@ -79,7 +80,7 @@ export default {
           <router-link to="/about">About</router-link>
         </div>
         <label for="colorPicker">Change Primary color</label>
-        <input type='color' id="colorPicker" class="colorPicker"/>
+        <input type='color' id="colorPicker" class="colorPicker" onchange={this.switchTheme}/>
         <a href="#" onClick={this.switchTheme}>Switch Theme</a>
         <router-view/>
       </div>
