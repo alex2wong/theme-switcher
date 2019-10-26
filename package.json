@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:css": "lessc -x .\\src\\assets\\custom.less .\\server\\public\\styles.css"
+    "server": "node ./server/compileserver.js",
+    "build:css": "lessc -x ./src/assets/custom.less ./server/public/styles.css"
   },
   "dependencies": {
     "axios": "^0.19.0",
